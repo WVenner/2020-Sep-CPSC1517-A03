@@ -10,6 +10,9 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            Window bob = new Window();
+            bob.Manufacturer = "don all glass windows";
+            Console.WriteLine($"{bob.Manufacturer}");
         }
     }
 }
