@@ -121,6 +121,17 @@ namespace ConsoleApp
                 }
             }
         }
+
+        //nullable numerics
+        //Why do we not need to fully implement a nullable numeric?
+        //numerics have a default of zero
+        //numerics can only store a numeric value (unless nullable)
+        //numerics can be null if declared as nullable
+        //the only 2 possibilities for a nullable numeric is a number or null
+        //IF the numeric has additional criteria THEN you can code
+        //the property as a fully implemented property
+        public int? NumberofPanes { get; set; }
+
         //Constructors
 
         //behaviours (methods)
