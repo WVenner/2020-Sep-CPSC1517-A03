@@ -23,7 +23,11 @@ namespace ConsoleApp
             myDefaultInstance.Manufacturer = "See Thru Holes";
 
             //Greedy constructor
-            Window myGreedyInstance = new Window(2.75m,1.9m,3, "See Thru Holes")
+            Window myGreedyInstance = new Window(2.75m, 1.9m, 3, "See Thru Holes");
+
+            decimal price = myGreedyInstance.WindowCost(5.76m);
+            decimal area = myDefaultInstance.WindowArea();
+
         }
     }
 }

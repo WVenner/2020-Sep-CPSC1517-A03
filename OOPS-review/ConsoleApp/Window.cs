@@ -208,5 +208,27 @@ namespace ConsoleApp
         }
 
         //behaviours (methods)
+        //are also known as methods
+        //optional
+        public decimal WindowArea()
+        {
+            //note: in this calculation we areusing the property for Height
+            //you could have used the data member fir _Hwight
+            //Width is an auto implemented property, you have no choice
+            
+            return Height * Width
+        }
+
+        //Perimeter of a Window
+        public decimal WindowPerimeter()
+        {
+            return 2 * (Height + Width);
+        }
+
+        //cost of window
+        public decimal WindowCost(decimal sqmeterprice)
+        {
+            return sqmeterprice * WindowArea();
+        }
     }
 }
