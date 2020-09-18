@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
-    class Wall
+    public class Wall
     {
         // height, width
 
@@ -56,6 +56,11 @@ namespace ConsoleApp
         {
             Height = 2.5m;
             Width = 4.25m;
+        }
+
+        public decimal WallArea()
+        {
+            return Height * Width;
         }
     }
 }

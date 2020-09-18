@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
-    class Door
+    public class Door
     {
         //height, width, material (nullable), right or left swing door
         //height and width > 0.0
@@ -21,20 +21,68 @@ namespace ConsoleApp
 
         public string Swing
         {
-            get { return _Swing}
+            get { return _Swing; }
             set
             {
                 if (value.ToUpper().Equals("R") || value.ToUpper().Equals("L"))
                 {
-                    _Swing
+                    _Swing = value;
+                }
+                else
+                {
+                    throw new Exception("Swing can only be left or right, input R or L to set door swing");
                 }
             }
         }
 
         public decimal Width
         {
-            get 
+            get { return _Width; }
+            set
+            {
+                if (value <= 0.0m)
+                {
+                    throw new Exception("Width can not be 0 or less than 0");
+                }
+                else
+                {
+                    _Width = value;
+                }
+            }
         }
+
+        public decimal Height
+        {
+            get { return _Height; }
+            set
+            {
+                if (value <= 0.0m)
+                {
+                    throw new Exception("Height can not be 0 or less than 0");
+                }
+                else
+                {
+                    _Height = value;
+                }
+            }
+        }
+
+        public string Material
+        {
+            get { return _Material; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Material must be specified");
+                }
+                else
+                {
+                    _Material = value;
+                }
+            }
+        }
+
 
         //string.IsNullOrEmpty
 
@@ -47,9 +95,7 @@ namespace ConsoleApp
 
         public decimal DoorArea()
         {
-      
-
-            return Height * Width
+            return Height * Width;
         }
         public decimal DoorPerimeter()
         {
