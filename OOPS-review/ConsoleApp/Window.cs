@@ -215,8 +215,8 @@ namespace ConsoleApp
             //note: in this calculation we areusing the property for Height
             //you could have used the data member fir _Hwight
             //Width is an auto implemented property, you have no choice
-            
-            return Height * Width
+
+            return Height * Width;
         }
 
         //Perimeter of a Window
