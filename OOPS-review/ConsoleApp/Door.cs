@@ -86,11 +86,14 @@ namespace ConsoleApp
 
         //string.IsNullOrEmpty
 
-        public Door()
-        {
-            Width = 1.2m;
-            Height = 1.75m;
+    
 
+        public Door(decimal width, decimal height, string swing, string material)
+        {
+            Width = width;
+            Height = height;
+            Swing = swing;
+            Material = material;
         }
 
         public decimal DoorArea()

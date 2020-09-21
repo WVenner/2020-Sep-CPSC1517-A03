@@ -67,8 +67,8 @@ namespace ConsoleApp
             //What does Room need
             //declare a set of List<T> for the components of the room
             List<Wall> walls = new List<Wall>();
-            List<Window> Windows = new List<Window>();
-            List<Door> Doors = new List<Door>();
+            List<Window> windows = new List<Window>();
+            List<Door> doors = new List<Door>();
             Room room = new Room(); //default constructor
 
             //read and collect the data for he room
@@ -129,7 +129,7 @@ namespace ConsoleApp
             //assume in this example that the literals were actully in variables
             //door = new Door(inputWidth, inputHeight, inputRL, inputMaterial);
             door = new Door(0.85m, 2.0m, "R", "Composite Pressed Wood");
-            Doors.Add(door);
+            doors.Add(door);
 
             //end of door loop
 
@@ -137,6 +137,71 @@ namespace ConsoleApp
             //prompt/input/validate
             //store
             window = new Window(1.3m, 1.3m, 2, "Fancy WIndows");
+            windows.Add(window);
+
+            //store all of the room components into the instance of room
+            room.Name = "Master Bedroom";
+            room.Walls = walls;
+            room.Windows = windows;
+            room.Doors = doors;
+
+            //calculate the number of cans of paint needed for the room
+            //assume a can of paint covers 27.87 sq m
+
+            //determine the area of wall surface to paint
+            //total area of walls
+            //total area of windows
+            //total area of doors
+            //paintable surface = wallarea - (windowarea + doorarea)
+            //cans = paintable surface / 27.87
+
+            //calculate the total area of the walls
+            //traverse the List<T> one at a time, start tot end
+            decimal wallarea = 0.0m;
+            foreach(Wall item in room.Walls)
+            {
+                //to reference something in an inctance
+                //instance.name.instanceitem
+                //instancename.property
+                //instancename.method()
+                // the . (dot) is called he dot operator
+                wallarea += item.WallArea();
+            }
+
+            //calcuate the area of the windows
+            //review the for(init; condition(s); increment){....}
+            decimal windowarea = 0.0m;
+            for (int i = 0; i < room.Windows.Count; i++)
+            {
+                //individual instances in a collection (List<T>) can be referenced using an index
+                windowarea += room.Windows[i].WindowArea();
+            }
+
+            //calculate the area of the doors
+            decimal doorarea = 0.0m;
+            //var is a datatype
+            //var is resolved at execution time --> Door
+            //the resolved datatype remains as the resolved datatype until the variable is terminated.
+            foreach (var item in room.Doors)
+            {
+                doorarea += item.DoorArea();
+            }
+
+            //paintable surface area
+            decimal netWallArea = wallarea - (windowarea + doorarea);
+
+            //calculate the number of cans require
+            decimal cansOfPaint = netWallArea / 27.87m;
+
+            //output results
+            Console.WriteLine($"Wall area is:\t\t\t\t{wallarea:0.00}");
+            // Console.WriteLine("Wall area is:\t\t{0:0.00}", wallarea);
+            Console.WriteLine($"Window area is:\t\t\t\t{windowarea:0.00}");
+            Console.WriteLine($"Door area is:\t\t\t\t{doorarea:0.00}");
+            Console.WriteLine($"Net wall area is:\t\t\t{netWallArea:0.00}");
+            Console.WriteLine($"Required number of cans is:\t{cansOfPaint:0.00}");
+
+
         }
 
     }
