@@ -1,7 +1,6 @@
 ﻿@{
     Page.Title = "Product Edit";
-    //Layout = "~/_Layout.cshtml;
-    Layout = "~/_LayoutMenu.cshtml";
+    Layout = "~/_Layout.cshtml";
 
 
     var pid = Request.QueryString["pid"];
@@ -102,70 +101,72 @@ else //for IsPost
     discontinued = queryProducts.Discontinued.ToString();//from sql 0/1
 }
     <div class="form-group">
-
         <form id="theForm" action="" method="post">
-            <div class="col-sm-6">
-                <label id="forProductID">Product ID</label><br />
-                <label id="forProductName">Product Name</label><br />
-                <label id="forSupplierList">Supplier</label><br />
-                <label id="forCategoryList">Category</label><br />
-                <label id="forQuantityPerUnit">Quantity Per Unit</label><br />
-                <label id="forUnitPrice">Unit Price</label><br />
-                <label id="forUnitsInStock">Units In Stock</label><br />
-                <label id="forUnitsOnOrder">Units On Order</label><br />
-                <label id="forReorderLevel">ReorderLevel</label><br />
-                <label id="forDiscontinued">Discontinued</label><br />
-            </div>
-            <div class="col-sm-6">
-                <input type="text" name="ProductID" value="@productid" readonly /><br/>
-                <input type="text" name="ProductName" value="@productname"  /><br/>
-                <select name="SupplierList">
-                    <option value="0">select...</option>
-                    @foreach (var acollectionrow in querySuppliers)
-                    {
-                        if (acollectionrow.SupplierID.ToString() == supplierid)
-                        {
-                            <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
-                        }
-                        else
-                        {
-                            <option value="@acollectionrow[0]">@acollectionrow[1]</option>
-                        }
-                    }
-                </select><br />
-                <select name="CategoryList">
-                    <option value="0">select...</option>
-                    @foreach (var acollectionrow in queryCategories)
-                    {
-                        if (acollectionrow.CategoryID.ToString() == categoryid)
-                        {
-                            <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
-                        }
-                        else
-                        {
-                            <option value="@acollectionrow[0]">@acollectionrow[1]</option>
-                        }
-                    }
-                </select><br />
-                <input type="text" name="QuantityPerUnit" value="@quantityperunit"  /><br />
-                <input type="number" name="UnitPrice" value="@unitprice" min="0.00" step="0.01"  /><br />
-                <input type="number" name="UnitsInStock" value="@unitsinstock" min="0" step="1" /><br />
-                <input type="number" name="UnitsOnOrder" value="@unitsonorder" min="0" step="1" /><br />
-                <input type="number" name="ReorderLevel" value="@reorderlevel" min="0" step="1" /><br />
-                @if (discontinued.Equals("True") || (discontinued == "1"))
-                {
-                    <input type="checkbox" name="Discontinued" checked value="1" /><br/><br/>
-                }
-                else
-                {
-                    <input type="checkbox" name="Discontinued" value="0" /><br /><br />
-                }
-            </div>
             <div class="row">
-                <button type="submit" name="theButton" id="theUpdate" class="btn btn-primary" value="update">Update</button>&nbsp;&nbsp;&nbsp;
-                <button type="submit" name="theButton" id="theDelete" class="btn btn-primary" value="delete" >Delete</button>&nbsp;&nbsp;&nbsp;
-                <button type="submit" name="theButton" id="theCancel" class="btn btn-primary" value="cancel" >Cancel</button>
-             </div>
-            
+                <div class="col-sm-6 text-right">
+                    <label id="forProductID">Product ID</label><br />
+                    <label id="forProductName">Product Name</label><br />
+                    <label id="forSupplierList">Supplier</label><br />
+                    <label id="forCategoryList">Category</label><br />
+                    <label id="forQuantityPerUnit">Quantity Per Unit</label><br />
+                    <label id="forUnitPrice">Unit Price</label><br />
+                    <label id="forUnitsInStock">Units In Stock</label><br />
+                    <label id="forUnitsOnOrder">Units On Order</label><br />
+                    <label id="forReorderLevel">ReorderLevel</label><br />
+                    <label id="forDiscontinued">Discontinued</label><br />
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" name="ProductID" value="@productid" readonly /><br />
+                    <input type="text" name="ProductName" value="@productname" /><br />
+                    <select name="SupplierList">
+                        <option value="0">select...</option>
+                        @foreach (var acollectionrow in querySuppliers)
+                        {
+                            if (acollectionrow.SupplierID.ToString() == supplierid)
+                            {
+                                <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
+                            }
+                            else
+                            {
+                                <option value="@acollectionrow[0]">@acollectionrow[1]</option>
+                            }
+                        }
+                    </select><br />
+                    <select name="CategoryList">
+                        <option value="0">select...</option>
+                        @foreach (var acollectionrow in queryCategories)
+                        {
+                            if (acollectionrow.CategoryID.ToString() == categoryid)
+                            {
+                                <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
+                            }
+                            else
+                            {
+                                <option value="@acollectionrow[0]">@acollectionrow[1]</option>
+                            }
+                        }
+                    </select><br />
+                    <input type="text" name="QuantityPerUnit" value="@quantityperunit" /><br />
+                    <input type="number" name="UnitPrice" value="@unitprice" min="0.00" step="0.01" /><br />
+                    <input type="number" name="UnitsInStock" value="@unitsinstock" min="0" step="1" /><br />
+                    <input type="number" name="UnitsOnOrder" value="@unitsonorder" min="0" step="1" /><br />
+                    <input type="number" name="ReorderLevel" value="@reorderlevel" min="0" step="1" /><br />
+                    @if (discontinued.Equals("True") || (discontinued == "1"))
+                    {
+                        <input type="checkbox" name="Discontinued" checked value="1" /><br /><br />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="Discontinued" value="0" /><br /><br />
+                    }
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" name="theButton" id="theUpdate" class="btn btn-primary" value="update">Update</button>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" name="theButton" id="theDelete" class="btn btn-primary" value="delete">Delete</button>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" name="theButton" id="theCancel" class="btn btn-primary" value="cancel">Cancel</button>
+                </div>
+            </div>  
         </form>
     </div>
