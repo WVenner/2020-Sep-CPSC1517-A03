@@ -49,23 +49,23 @@
 
     //nullable money field
     //in this example UnitPrice has been validated usin HTML5
-    // therefore, this validation will always be godd for datatype
+    // therefore, this validation will always be good for datatype
     //.Range here is being used for indicating a "floor" with a mx "Ceiling"
     Validation.Add("UnitPrice",
         Validator.Decimal("Unit Price must be a dollar amount"),
         Validator.Range(0.00,double.MaxValue, "Unit price must be greater or equal to 0.00"));
 
-    //ullable inteer field
+    //nullable integer field
     //the UnitsInStock, UnitsOnOrder, ReorderLevel are smallint on the database (max 32757)
     Validation.Add("UnitInStock",
         Validator.Integer("Units in stock must be a positive amount"),
-        Validator.Range(0, 32767, "Units in stock must be greater or equal to 0"));
+        Validator.Range(0, 32757, "Units in stock must be greater or equal to 0"));
     Validation.Add("UnitOnOrder",
         Validator.Integer("Units On Order must be a positive amount"),
-        Validator.Range(0, 32767, "Units on order must be greater or equal to 0"));
+        Validator.Range(0, 32757, "Units on order must be greater or equal to 0"));
     Validation.Add("ReorderLevel",
         Validator.Integer("Reorder level must be a positive amount"),
-        Validator.Range(0, 32767, "Reorder Level must be greater or equal to 0"));
+        Validator.Range(0, 32757, "Reorder Level must be greater or equal to 0"));
 
     //pattern matching using RegEx() regular expression
     //lets assume we have a field called Email
@@ -159,7 +159,7 @@
                       ReorderLevel, Discontinued)
           VALUES(@0, @1, @2, @3, @4, @5, @6, @7, @8)";
                 //  execute the command
-                //to execute an insertm yodatem ir delete command, use: .Execute()
+                //to execute an insert command or delete command, use: .Execute()
                 db.Execute(insertcommand, productname,
                             int.Parse(supplierid) == -1 ? null : supplierid,
                             int.Parse(categoryid) == -1 ? null : categoryid,
@@ -288,7 +288,7 @@ else
                 use the keyword: required
                 is there was a price rang, you could use min="n" and/or max="n"*@
             <input type="number" id="UnitPrice" name="UnitPrice"
-                   value="@unitprice" step="0.01" /><br />
+                   value="@unitprice" step="0.01" min="0.00"/><br />
             <input type="text" id="UnitsInStock" name="UnitsInStock"
                    value="@unitsinstock" /><br />
             <input type="text" id="UnitsOnOrder" name="UnitsOnOrder"
@@ -305,8 +305,12 @@ else
                     class="btn btn-primary">
                 Submit
             </button>&nbsp;&nbsp;
+            @* The parameter formnovalidate will tell your browser NOT to validate HTML5 validation. 
+                Since validation controls are executed by
+                Validation.IsValid(), properly implemented logic will ensure whether 
+                the validation controls are executed or NOT.*@
             <button type="submit" name="theButton" id="theButton" value="clear"
-                    class="btn btn-light">
+                    class="btn btn-light" formnovalidate>
                 Clear
             </button>
         </div>

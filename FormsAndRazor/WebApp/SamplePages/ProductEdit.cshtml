@@ -26,7 +26,7 @@
         //discontinued is a checkbox
         //the possible values from the check box is null (not checked) or "on" (checked)
         //the acceptable sql values for a bit are 0 and 1
-        if (discontinued==null)
+        if (discontinued == null)
         {
             discontinued = "0";
         }
@@ -37,7 +37,21 @@
     }
     else
     {
-        productid = pid;
+        //WHY?
+        //validate the passed value
+        //if ok, then I place in my working pkey field
+        int npid = 0;
+        if(int.TryParse(pid, out npid))
+        {
+            //able to convert to integer
+            productid = npid.ToString();
+        }
+        else
+        {
+            //unable to conert to integer
+            productid = "0";
+        }
+        
         discontinued = "0";
     }
     var db = Database.Open("NWDB");
@@ -52,7 +66,12 @@
     var queryStatement = "SELECT ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued "
                         + "FROM Products "
                         + "WHERE ProductID = @0";
-    var queryProducts = db.QuerySingle(queryStatement,pid);
+    //Why? 
+    //queryproducts needs to have a datatype of a returned record
+    // from the database
+    //it is also global
+    //var obtains its datatype on its first use in your program 
+    var queryProducts = db.QuerySingle(queryStatement, productid);
 }
 
 
@@ -60,20 +79,216 @@
 @section banner{
     <h1>Product Edit - Update and Delete</h1>
 }
-@if(IsPost)
+@if (IsPost)
 {
     if (thebutton.Equals("cancel"))
     {
-       <p>Your cancel code goes here</p>
+        //a) could redirect to the search page
+        //b) reset the web controls to the current database record
+        // and display an appropriate message
+        //c) empty the web controls and display an appropriate message
+        productid = "";
+        productname = "";
+        supplierid = "0";
+        categoryid = "0";
+        quantityperunit = "";
+        unitprice = "";
+        unitsinstock = "";
+        unitsonorder = "";
+        reorderlevel = "";
+        discontinued = "";
+
+        <p>
+            <span style="color:firebrick">You cancelled the operation. Return to search for a new product</span>
+            <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+        </p>
     }
     else if (thebutton.Equals("delete"))
     {
-        <p>Your delete code goes here</p>
+        if (string.IsNullOrEmpty(productid))
+        {
+            <p>
+                <span style="color:firebrick">No product Id present. Return to search for a new product</span>
+                <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+            </p>
+        }
+        else
+        {
+            //now do the delete
+
+            try
+            {
+                //connect to database
+                //done above
+
+                //there are 2 scenarios to handle a delete
+                // a) physical delete (removes the record from the database
+                // b) logical delete (flags the record on the database to indicate
+                //  to othe processes to treat this record as if it does not exist)
+
+                //Scenarios
+                // a) physical delete (removes the record from the database
+                @*var deletecommand = @"DELETE Products
+                    WHERE ProductID = @0";
+                //execution
+                //the RETURNED value of the execution is the number of rows affected
+                // on the database
+                int rowsaffected = db.Execute(deletecommand, productid);
+                //check your results
+                if (rowsaffected > 0)
+                {
+                    <p>
+                        <span style="color:forestgreen">Product has been removed</span>
+                    </p>
+                    //optionally, reset all fields to empty
+                    //DO set the primary key field to empty
+                    productid = "";
+                }
+                else
+                {
+                    <p>
+                        <span style="color:firebrick">
+                            Update not done. No product called @productname with a
+                            product id of @productid was found on file
+                            Return to search for a new product.
+
+                        </span>
+
+                        <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+                    </p>
+                    productid = "";
+                }*@
+
+                // b) logical delete (flags the record on the database to indicate
+                //  to othe processes to treat this record as if it does not exist)
+                //in this scenario, you are actually going to do an update NOT a delete command
+
+                //setup command
+                var updatecommand = @"UPDATE Products
+                    SET Discontinued = 1
+                    WHERE ProductID = @0";
+                //execution
+                //the RETURNED value of the execution is the number of rows affected
+                // on the database
+                int rowsaffected = db.Execute(updatecommand, productid);
+                //check your results
+                if (rowsaffected > 0)
+                {
+                    <p>
+                        <span style="color:forestgreen">Product has been discontinued</span>
+                    </p>
+                    //set the contreol to reflect the product has been discontinued
+                    discontinued = "1";
+                }
+                else
+                {
+                    <p>
+                        <span style="color:firebrick">
+                            Update not done. No product called @productname with a
+                            product id of @productid was found on file
+                            Return to search for a new product.
+
+                        </span>
+
+                        <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+                    </p>
+                    productid = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                <p>
+                    <span style="color:firebrick">Error: @ex.Message</span>
+                </p>
+            }
+        }
     }
     else
     {
+        //update
 
-        <p>Your update code goes here</p>
+        //do your validation
+        //validation can be done using HTML5 and/or Validation Controls
+
+        //if (Validation.IsValid())
+        //{
+
+        //do any other validation not covered by HTML5 and/or Validation controls
+
+        //for the update you have to ensure there is a primary key value (ProductID)
+        // so the update can find the record on the database
+        //during the Insert, this was NOT necessary as the primary key was an
+        // identity key, thus the database generated the value
+
+        if (string.IsNullOrEmpty(productid))
+        {
+            <p>
+                <span style="color:firebrick">No product Id present. Return to search for a new product</span>
+                <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+            </p>
+        }
+        else
+        {
+            //now do the update
+            try
+            {
+                //connect to database
+                //done above
+
+                //setup command
+                var updatecommand = @"UPDATE Products
+SET ProductName = @0,
+SupplierID = @1,
+CategoryID = @2,
+QuantityPerUnit = @3,
+UnitPrice = @4,
+UnitsInStock = @5,
+UnitsOnOrder = @6,
+ReorderLevel= @7,
+Discontinued = @8
+WHERE ProductID = @9";
+                //execution
+                //the RETURNED value of the execution is the number of rows affected
+                // on the database
+                int rowsaffected = db.Execute(updatecommand, productname,
+                            int.Parse(supplierid) == -1 ? null : supplierid,
+                            int.Parse(categoryid) == -1 ? null : categoryid,
+                            string.IsNullOrEmpty(quantityperunit) ? null : quantityperunit,
+                            string.IsNullOrEmpty(unitprice) ? "0.00" : unitprice,
+                            string.IsNullOrEmpty(unitsinstock) ? null : unitsinstock,
+                            string.IsNullOrEmpty(unitsonorder) ? null : unitsonorder,
+                            string.IsNullOrEmpty(reorderlevel) ? null : reorderlevel,
+                            discontinued, productid);
+                //check your results
+                if (rowsaffected > 0)
+                {
+                    <p>
+                        <span style="color:forestgreen">Update successful</span>
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        <span style="color:firebrick">
+                            Update not done. No product called @productname with a
+                            product id of @productid was found on file
+                            Return to search for a new product.
+
+                        </span>
+
+                        <a href="~/SamplePages/ProductSearch.cshtml">Go to search</a>
+                    </p>
+                    productid = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                <p>
+                    <span style="color:firebrick">Error: @ex.Message</span>
+                </p>
+            }
+        }
+        //}
     }
 }
 else //for IsPost
@@ -81,7 +296,7 @@ else //for IsPost
     //if this page is being shown for the "first time"
     //the page accesses the database for the current record
     //to display to the user
-    queryProducts = db.QuerySingle(queryStatement, pid);
+    queryProducts = db.QuerySingle(queryStatement, productid);
 
     //moving the current record data to the form controls
     //NEVER code to the data supplied
@@ -100,73 +315,78 @@ else //for IsPost
     reorderlevel = queryProducts.ReorderLevel == null ? "" : queryProducts.ReorderLevel.ToString();
     discontinued = queryProducts.Discontinued.ToString();//from sql 0/1
 }
-    <div class="form-group">
-        <form id="theForm" action="" method="post">
-            <div class="row">
-                <div class="col-sm-6 text-right">
-                    <label id="forProductID">Product ID</label><br />
-                    <label id="forProductName">Product Name</label><br />
-                    <label id="forSupplierList">Supplier</label><br />
-                    <label id="forCategoryList">Category</label><br />
-                    <label id="forQuantityPerUnit">Quantity Per Unit</label><br />
-                    <label id="forUnitPrice">Unit Price</label><br />
-                    <label id="forUnitsInStock">Units In Stock</label><br />
-                    <label id="forUnitsOnOrder">Units On Order</label><br />
-                    <label id="forReorderLevel">ReorderLevel</label><br />
-                    <label id="forDiscontinued">Discontinued</label><br />
-                </div>
-                <div class="col-sm-6">
-                    <input type="text" name="ProductID" value="@productid" readonly /><br />
-                    <input type="text" name="ProductName" value="@productname" /><br />
-                    <select name="SupplierList">
-                        <option value="0">select...</option>
-                        @foreach (var acollectionrow in querySuppliers)
-                        {
-                            if (acollectionrow.SupplierID.ToString() == supplierid)
-                            {
-                                <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
-                            }
-                            else
-                            {
-                                <option value="@acollectionrow[0]">@acollectionrow[1]</option>
-                            }
-                        }
-                    </select><br />
-                    <select name="CategoryList">
-                        <option value="0">select...</option>
-                        @foreach (var acollectionrow in queryCategories)
-                        {
-                            if (acollectionrow.CategoryID.ToString() == categoryid)
-                            {
-                                <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
-                            }
-                            else
-                            {
-                                <option value="@acollectionrow[0]">@acollectionrow[1]</option>
-                            }
-                        }
-                    </select><br />
-                    <input type="text" name="QuantityPerUnit" value="@quantityperunit" /><br />
-                    <input type="number" name="UnitPrice" value="@unitprice" min="0.00" step="0.01" /><br />
-                    <input type="number" name="UnitsInStock" value="@unitsinstock" min="0" step="1" /><br />
-                    <input type="number" name="UnitsOnOrder" value="@unitsonorder" min="0" step="1" /><br />
-                    <input type="number" name="ReorderLevel" value="@reorderlevel" min="0" step="1" /><br />
-                    @if (discontinued.Equals("True") || (discontinued == "1"))
-                    {
-                        <input type="checkbox" name="Discontinued" checked value="1" /><br /><br />
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="Discontinued" value="0" /><br /><br />
-                    }
-                </div>
+<div class="form-group">
+    <form id="theForm" action="" method="post">
+        <div class="row">
+            <div class="col-sm-6 text-right">
+                <label id="forProductID">Product ID</label><br />
+                <label id="forProductName">Product Name</label><br />
+                <label id="forSupplierList">Supplier</label><br />
+                <label id="forCategoryList">Category</label><br />
+                <label id="forQuantityPerUnit">Quantity Per Unit</label><br />
+                <label id="forUnitPrice">Unit Price</label><br />
+                <label id="forUnitsInStock">Units In Stock</label><br />
+                <label id="forUnitsOnOrder">Units On Order</label><br />
+                <label id="forReorderLevel">ReorderLevel</label><br />
+                <label id="forDiscontinued">Discontinued</label><br />
             </div>
-            <div class="row text-center">
-                <div class="col-sm-12 text-center">
-                    <button type="submit" name="theButton" id="theUpdate" class="btn btn-primary" value="update">Update</button>&nbsp;&nbsp;&nbsp;
-                    <button type="submit" name="theButton" id="theDelete" class="btn btn-primary" value="delete">Delete</button>&nbsp;&nbsp;&nbsp;
-                    <button type="submit" name="theButton" id="theCancel" class="btn btn-primary" value="cancel">Cancel</button>
-                </div>
-            </div>  
-        </form>
-    </div>
+            <div class="col-sm-6">
+                <input type="text" name="ProductID" value="@productid" readonly /><br />
+                <input type="text" name="ProductName" value="@productname" /><br />
+                <select name="SupplierList">
+                    <option value="0">select...</option>
+                    @foreach (var acollectionrow in querySuppliers)
+                    {
+                        if (acollectionrow.SupplierID.ToString() == supplierid)
+                        {
+                            <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
+                        }
+                        else
+                        {
+                            <option value="@acollectionrow[0]">@acollectionrow[1]</option>
+                        }
+                    }
+                </select><br />
+                <select name="CategoryList">
+                    <option value="0">select...</option>
+                    @foreach (var acollectionrow in queryCategories)
+                    {
+                        if (acollectionrow.CategoryID.ToString() == categoryid)
+                        {
+                            <option value="@acollectionrow[0]" selected>@acollectionrow[1]</option>
+                        }
+                        else
+                        {
+                            <option value="@acollectionrow[0]">@acollectionrow[1]</option>
+                        }
+                    }
+                </select><br />
+                <input type="text" name="QuantityPerUnit" value="@quantityperunit" /><br />
+                <input type="number" name="UnitPrice" value="@unitprice" min="0.00" step="0.01" /><br />
+                <input type="number" name="UnitsInStock" value="@unitsinstock" min="0" step="1" /><br />
+                <input type="number" name="UnitsOnOrder" value="@unitsonorder" min="0" step="1" /><br />
+                <input type="number" name="ReorderLevel" value="@reorderlevel" min="0" step="1" /><br />
+                @if (discontinued.Equals("True") || (discontinued == "1"))
+                {
+                    <input type="checkbox" name="Discontinued" checked value="1" /><br /><br />
+                }
+                else
+                {
+                    <input type="checkbox" name="Discontinued" value="0" /><br /><br />
+                }
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-12 text-center">
+                <button type="submit" name="theButton" id="theUpdate" class="btn btn-primary" value="update">Update</button>&nbsp;&nbsp;&nbsp;
+                @* How does one confirm a delete (especially for scenario (a)) 
+                    use the function call "confirm" on the onclick event of your button*@
+
+                <button type="submit" name="theButton" id="theDelete" class="btn btn-danger" value="delete"
+                        onclick="return confirm('Are you sure you widh to discontinue this product?')">Discontinue</button>&nbsp;&nbsp;&nbsp;
+
+                <button type="submit" name="theButton" id="theCancel" class="btn btn-primary" value="cancel">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
