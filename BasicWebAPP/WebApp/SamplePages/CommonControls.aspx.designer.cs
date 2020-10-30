@@ -69,13 +69,13 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// ChecBoxChoice control.
+        /// CheckBoxChoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ChecBoxChoice;
+        protected global::System.Web.UI.WebControls.CheckBox CheckBoxChoice;
 
         /// <summary>
         /// Literal1 control.
@@ -105,13 +105,13 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// CollecionList control.
+        /// CollectionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CollecionList;
+        protected global::System.Web.UI.WebControls.DropDownList CollectionList;
 
         /// <summary>
         /// LinkButtonChoice control.
