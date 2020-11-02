@@ -16,6 +16,11 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
+    <style>
+        body {
+            padding-top: 0;
+        }
+    </style>
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
@@ -65,8 +70,9 @@
         <%-- Replacement code for the default menu
                 this code uses the asp:Menu control
                 this code uses the asp:SiteMapDataSource control
-                this code uses bootstrap 4.x code--%>
-        <div class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+                this code uses bootstrap 4.x code
+                placing navbar-fixed-top on the 1st div class fixes your menu to the top of your browser (phsically)--%>
+        <div class="navbar navbar-expand-md navbar-light navbar-fixed-top" style="background-color: #e3f2fd;">
            <a class="navbar-brand" runat="server" href="~/"><strong>CPSC1517-A03</strong></a>
            <button class="navbar-toggler" type="button" data-toggle="collapse" 
                data-target="#navbarSupportedContent" 

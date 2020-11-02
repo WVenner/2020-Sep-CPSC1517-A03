@@ -7,13 +7,16 @@
     <!-- self-closing SiteMapNodes CANNOT have a submenu-->
     <!-- Unlike the default menu in your site.master, url page references MUST include the file extension (.aspx)-->
     <siteMapNode url="~/Default.aspx" title="Home"  description="optional , serves as a tooltip to the menu" />
-    <siteMapNode url="~/HelloWorld.aspx" title="Hello World"  description="" />
+    
     
     <!-- dropdown submenu-->
     <!-- submenu items MUST exist between a set of separateopen/close siteMapNode tags-->
     <siteMapNode url="" title="Samples" description="the top of a submenu">
       <!--any sitemapnodes inside of a set of open/close sitempanodes belong to that submenu-->
+      <siteMapNode url="~/HelloWorld.aspx" title="Hello World"  description="" />
       <siteMapNode url="~/SamplePages/CommonControls.aspx" title="Common Controls"  description="a submenu item" />
+      <siteMapNode url="~/SamplePages/JobApp.aspx" title="Job Application"/>
+      
       <!--can do submenus within submenus-->
     </siteMapNode>
     <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
