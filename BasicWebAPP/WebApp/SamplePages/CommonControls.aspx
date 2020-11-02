@@ -69,7 +69,7 @@
 
             </asp:DropDownList>
             &nbsp;&nbsp;
-            <asp:LinkButton ID="LinkButtonChoice" runat="server">Submit Collection Choice</asp:LinkButton>
+            <asp:LinkButton ID="LinkButtonChoice" runat="server" OnClick="LinkButtonChoice_Click">Submit Collection Choice</asp:LinkButton>
         </div>
     </div>
      <%--  Output are for messages--%>

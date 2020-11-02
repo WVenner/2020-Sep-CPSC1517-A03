@@ -151,5 +151,42 @@ namespace WebApp.SamplePages
                     RadioButtonListChoice.SelectedIndex;
             }
         }
+
+        protected void LinkButtonChoice_Click(object sender, EventArgs e)
+        {
+            int numberchoice = 0;
+            //does the dropdownlist have a prompt line?
+            // YES
+            //validtaion of selection must be done
+            //Are we positioned (physically) on the promp line
+            if (CollectionList.SelectedIndex == 0)
+            {
+                MessageLabel.Text = "Select a choice then press your button";
+            }
+            else
+            {
+                numberchoice = int.Parse(CollectionList.SelectedValue);
+                RadioButtonListChoice.SelectedValue = numberchoice.ToString();
+
+                if (numberchoice == 2 || numberchoice == 4)
+                {
+                    CheckBoxChoice.Checked = true;
+                }
+                else
+                {
+                    CheckBoxChoice.Checked = false;
+                }
+
+                NumberChoice.Text = numberchoice.ToString();
+
+                DisplayReadonly.Text = CollectionList.SelectedItem.Text +
+                    " at index " + CollectionList.SelectedIndex +
+                    " having a vlue of " + CollectionList.SelectedValue +
+                    ". This Matches the radio button choice item value " +
+                    RadioButtonListChoice.SelectedValue +
+                    " located at radiobuttonlist index " +
+                    RadioButtonListChoice.SelectedIndex;
+            }
+        }
     }
 }
