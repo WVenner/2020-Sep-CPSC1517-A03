@@ -120,7 +120,9 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="SamplePages\ContestEntry.aspx" />
     <Content Include="SamplePages\JobApp.aspx" />
+    <Content Include="SamplePages\JobApplication.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -277,6 +279,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -295,12 +298,26 @@
     <Compile Include="SamplePages\CommonControls.aspx.designer.cs">
       <DependentUpon>CommonControls.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SamplePages\ContestEntry.aspx.cs">
+      <DependentUpon>ContestEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\ContestEntry.aspx.designer.cs">
+      <DependentUpon>ContestEntry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\JobApp.aspx.cs">
       <DependentUpon>JobApp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SamplePages\JobApp.aspx.designer.cs">
       <DependentUpon>JobApp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePages\JobApplication.aspx.cs">
+      <DependentUpon>JobApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\JobApplication.aspx.designer.cs">
+      <DependentUpon>JobApplication.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -16,7 +16,7 @@
       <siteMapNode url="~/HelloWorld.aspx" title="Hello World"  description="" />
       <siteMapNode url="~/SamplePages/CommonControls.aspx" title="Common Controls"  description="a submenu item" />
       <siteMapNode url="~/SamplePages/JobApp.aspx" title="Job Application"/>
-      
+      <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Contest Entry"/>
       <!--can do submenus within submenus-->
     </siteMapNode>
     <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
