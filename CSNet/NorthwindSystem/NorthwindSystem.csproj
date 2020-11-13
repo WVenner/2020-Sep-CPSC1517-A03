@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="BLL\dummy.cs" />
     <Compile Include="DAL\dummy.cs" />
-    <Compile Include="Entities\dummy.cs" />
+    <Compile Include="Entities\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
