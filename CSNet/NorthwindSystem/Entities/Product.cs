@@ -59,7 +59,7 @@ namespace NorthwindSystem.Entities
         [StringLength(20, ErrorMessage = "Quantity per unit is limited to 20 characters")]
         public string QuantityPerUnit 
         {
-            get { return _QuantityPerUnit}
+            get { return _QuantityPerUnit; }
             set
             {
                 _QuantityPerUnit = string.IsNullOrEmpty(value) ? null : value;
