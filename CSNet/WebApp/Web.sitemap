@@ -15,6 +15,7 @@
       <!--any sitemapnodes inside of a set of open/close sitempanodes belong to that submenu-->
       <siteMapNode url="~/SamplePages/testPage.aspx" title="Test Page"  description="" />
       <!--can do submenus within submenus-->
+      <siteMapNode url="~/SamplePages/SimpleQuery.aspx" title="Simple Query"  description="" />
     </siteMapNode>
     <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
     <siteMapNode url="~/About.aspx" title="About"  description="" />
