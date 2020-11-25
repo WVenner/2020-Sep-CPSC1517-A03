@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using NorthwindSystem.Entities;
 using NorthwindSystem.DAL;
-using System.Data.SqlClient;
+using System.Data.SqlClient; //this is needed for SqlParameter("paramname", value)
 #endregion
 
 namespace NorthwindSystem.BLL

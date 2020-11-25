@@ -18,6 +18,7 @@
         </div>
     </div>
     <br />
+    <%-- replacing MessageLabel asp element --%>
     <asp:DataList ID="Message" runat="server" Enabled="False">
         <ItemTemplate>
             <%# Container.DataItem %>
