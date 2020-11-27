@@ -15,6 +15,15 @@ namespace NorthwindSystem.BLL
 {
     public class ProductController
     {
+        public List<Product> Product_ListAll()
+        {
+
+            using (var context = new NorthwindSystemContext())
+            {
+
+                return context.Products.ToList();
+            }
+        }
         //lookup by primary key
         public Product Product_FindByID(int productid)
         {

@@ -18,7 +18,7 @@
             &nbsp;&nbsp;
             <asp:LinkButton ID="SearchProduct" runat="server" OnClick="SearchProduct_Click"><i class="fa fa-search"></i>Search Product</asp:LinkButton>
             &nbsp;&nbsp;
-            <asp:LinkButton ID="Clear" runat="server" OnClick="Clear_Click"><i class="fa fa-trash"></i>Clear</asp:LinkButton>
+            <asp:LinkButton ID="Clear" runat="server" OnClick="Clear_Click" CausesValidation="false"><i class="fa fa-trash"></i>Clear</asp:LinkButton>
             <br />
             <asp:Label ID="MessageLabel" runat="server"></asp:Label>
             <br />
@@ -29,7 +29,7 @@
                     <asp:CommandField CausesValidation="False" SelectText="View" ShowSelectButton="True" ButtonType="Button"></asp:CommandField>
                     <asp:TemplateField HeaderText="Name">
                         <ItemTemplate>
-                            <asp:HiddenField ID="HiddenField1" runat="server" 
+                            <asp:HiddenField ID="ProductID" runat="server" 
                                 Value='<%# Eval("ProductID") %>'/>
                             <asp:Label ID="Label2" runat="server" 
                                 Text='<%# Eval("ProductName") %>'></asp:Label>
