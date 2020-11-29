@@ -23,7 +23,8 @@
             <asp:Label ID="MessageLabel" runat="server"></asp:Label>
             <br />
             <asp:GridView ID="ProductList" runat="server"
-                CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" AutoGenerateColumns="False" OnSelectedIndexChanged="ProductList_SelectedIndexChanged">
+                CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" AutoGenerateColumns="False" 
+                OnSelectedIndexChanged="ProductList_SelectedIndexChanged" AllowPaging="True" PageSize="4" OnPageIndexChanging="ProductList_PageIndexChanging">
 
                 <Columns>
                     <asp:CommandField CausesValidation="False" SelectText="View" ShowSelectButton="True" ButtonType="Button"></asp:CommandField>
@@ -51,6 +52,8 @@
                         <ItemStyle HorizontalAlign="Right"></ItemStyle>
                     </asp:TemplateField>
                 </Columns>
+                <PagerSettings FirstPageText="Start" LastPageText="End;" Mode="NumericFirstLast" 
+                    NextPageText="..." PageButtonCount="5" PreviousPageText="..." />
             </asp:GridView>
         </div>
         <div class="col-5">
