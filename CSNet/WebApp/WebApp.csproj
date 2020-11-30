@@ -129,6 +129,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\ODSUXDesignDemo.png" />
     <Content Include="SamplePages\GridViewCodeBehind.aspx" />
     <Content Include="SamplePages\SearchingUsingODS.aspx" />
     <Content Include="SamplePages\SimpleQuery.aspx" />
@@ -357,7 +358,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
