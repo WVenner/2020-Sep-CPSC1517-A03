@@ -9,10 +9,15 @@ using System.Threading.Tasks;
 using NorthwindSystem.Entities;
 using NorthwindSystem.DAL;
 using System.Data.SqlClient; //needed for sqlparameter
+using System.ComponentModel; //required for ODS exposure
 #endregion
 
 namespace NorthwindSystem.BLL
 {
+    //expose this class to the ObjectDataSource wizard
+    //this will allow for easy selection of values for 
+    //the wizard, and the wizard will generate my code
+    [DataObject]
     public class ProductController
     {
         public List<Product> Product_ListAll()
@@ -36,6 +41,8 @@ namespace NorthwindSystem.BLL
         }
 
         //lookup using a non primary key field
+        //expose the method you wish the wizard to know about
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Product> Product_GetByPartialProductName(string productname)
         {
             using(var context = new NorthwindSystemContext())

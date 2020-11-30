@@ -17,6 +17,7 @@
       <!--can do submenus within submenus-->
       <siteMapNode url="~/SamplePages/SimpleQuery.aspx" title="Simple Query"  description="" />
       <siteMapNode url="~/SamplePages/GridViewCodeBehind.aspx" title="Using GridView"  description="" />
+      <siteMapNode url="~/SamplePages/SearchingUsingODS" title="Using ODS for search"  description="" />
 
     </siteMapNode>
     <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
