@@ -15,7 +15,7 @@
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     </div>
     <div class="row">
-        <div class="col-7">
+        <div class="col-9">
             <asp:Label ID="Label1" runat="server" Text="Enter a product name:"></asp:Label>
             &nbsp;&nbsp;
             <asp:TextBox ID="ProductArg" runat="server"></asp:TextBox>
@@ -42,6 +42,13 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Cat">
+                        <ItemTemplate>
+                            <asp:DropDownList ID="CategoryList" runat="server">
+
+                            </asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Price ($)">
                         <ItemTemplate>
                             <asp:Label ID="Label4" runat="server" 
@@ -62,7 +69,7 @@
                
             </asp:GridView>
         </div>
-        <div class="col-5">
+        <div class="col-3">
             <table>
                 <tr>
                     <td align="right">
@@ -108,5 +115,8 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="ProductArg" PropertyName="Text" DefaultValue="wrwarghgy5eye" Name="productname" Type="String"></asp:ControlParameter>
         </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="CategoryListODS" runat="server">
+
     </asp:ObjectDataSource>
 </asp:Content>
