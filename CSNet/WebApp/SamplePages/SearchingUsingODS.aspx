@@ -42,9 +42,9 @@
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Cat">
+                    <asp:TemplateField HeaderText="Cat.">
                         <ItemTemplate>
-                            <asp:DropDownList ID="CategoryList" runat="server">
+                            <asp:DropDownList ID="CategoryList" runat="server" DataSourceID="CategoryListODS" DataTextField="CategoryName" DataValueField="CategoryID" selectedvalue='<%# Eval("CategoryID") %>'>
 
                             </asp:DropDownList>
                         </ItemTemplate>
@@ -64,6 +64,9 @@
                         <ItemStyle HorizontalAlign="Right"></ItemStyle>
                     </asp:TemplateField>
                 </Columns>
+                <EmptyDataTemplate>
+                    No data to display
+                </EmptyDataTemplate>
                
                 <PagerSettings FirstPageText="Start" LastPageText="End" Mode="NumericFirstLast" NextPageText="..." PageButtonCount="5" PreviousPageText="..." />
                
@@ -116,7 +119,7 @@
             <asp:ControlParameter ControlID="ProductArg" PropertyName="Text" DefaultValue="wrwarghgy5eye" Name="productname" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="CategoryListODS" runat="server">
+    <asp:ObjectDataSource ID="CategoryListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Category_ListAll" TypeName="NorthwindSystem.BLL.CategoryController">
 
     </asp:ObjectDataSource>
 </asp:Content>
