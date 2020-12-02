@@ -32,5 +32,7 @@ namespace NorthwindSystem.DAL
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Supplier> Suppliers { get; set; }
+
     }
 }
